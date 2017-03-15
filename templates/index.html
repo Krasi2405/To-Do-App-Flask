@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class = "to_do_items">
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+	{% for item in data %}
+	<li>{{ item["content"] }}</li>
+	{% endfor %}
+</ul>
+
+<div class = "left_menu">
+	<ul>
+		<li>Sample List</li>
+		<li>Sample List2</li>
+		<li>Sample List3</li>
+	</ul>
+</div>
+
+<div class = "option_menu">
+	<div class = "form_left">
+		<form id = "add" action = "{{ url_for('save') }}" method = "POST">
+			<div class = "form_items">
+				<label>Create new To-Do</label>
+				<textarea name = "content" form = "add" rows = "4" cols = "50" autofocus></textarea>
+				<input type = "submit" value = "Submit">
+			</div>
+		</form>
+	</div>
+
+	<div class = "form_right">
+		<form id = "delete_all" action = "{{ url_for('delete_all') }}" method = "POST">
+			<div class = "form_items">
+				<input type = "submit" value = "Delete All Items">
+			</div>
+		</form>
+
+		<form id = "delete_item" action = "{{ url_for('delete_item') }}" method = "POST">
+			<div class = "form_items">
+				<input type = "number" name = "index">
+				<input type = "submit" value = "Delete Item">
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+textarea {
+  resize: none;
+}
+
+ul li {
+  text-decoration: none;
+}
+
+li {
+  word-wrap: break-word;
+}
+
+body * {
+  display: block;
+}
+
+title {
+  display: none;
+}
+
+.option_menu {
+  height: 20vh;
+  background-color: #aaa;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 75%;
+
+}
+
+.left_menu {
+  background: lightblue;
+  position: fixed;
+  left: 0px;
+  height: 100vh;
+  width: 25%;
+  float: left;
+}
+
+.to_do_items {
+  background: lightgreen;
+  float: right;
+  width: 75%;
+}
+
+.form_left {
+  width: 70%;
+  float: left;
+  height: 100%;
+  border: solid 2px black;
+}
+
+.form_right {
+  width: 30%;
+  height: 100%;
+  float: right;
+  border: solid 2px black;
+}
+
+.form_items {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.form_items * {
+  margin: 5px auto;
+  width: 100%;
+  text-align: center;
+}
