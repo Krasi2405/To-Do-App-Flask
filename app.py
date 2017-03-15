@@ -26,9 +26,7 @@ def index():
 @app.route("/save", methods = ["POST"])
 def save():
 	data = get_saved_data()
-
 	data.append(dict(request.form.items()))
-
 	response = make_response(redirect(url_for("index")))
 	response.set_cookie('list_info', json.dumps(data))
 	return response

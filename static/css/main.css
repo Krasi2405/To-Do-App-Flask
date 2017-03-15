@@ -1,3 +1,7 @@
+body {
+  background-color: #fafafa;
+}
+
 textarea {
   resize: none;
 }
@@ -19,7 +23,7 @@ title {
 }
 
 .option_menu {
-  height: 20vh;
+  height: 200px;
   background-color: #aaa;
   position: fixed;
   bottom: 0px;
@@ -29,7 +33,8 @@ title {
 }
 
 .left_menu {
-  background: lightblue;
+  background-color: #6098f2;
+  border: solid 10px #3169c4;
   position: fixed;
   left: 0px;
   height: 100vh;
@@ -38,6 +43,8 @@ title {
 }
 
 .to_do_items {
+  border-top: solid 10px #3169c4;
+  border-right: solid 10px #3169c4;
   background: lightgreen;
   float: right;
   width: 75%;
@@ -47,14 +54,18 @@ title {
   width: 70%;
   float: left;
   height: 100%;
-  border: solid 2px black;
+  border: solid 10px #3169c4;
+  border-left: none;
+  background-color: #6098f2;
 }
 
 .form_right {
   width: 30%;
   height: 100%;
   float: right;
-  border: solid 2px black;
+  border: solid 10px #3169c4;
+  border-left: none;
+  background-color: #6098f2;
 }
 
 .form_items {
@@ -64,6 +75,22 @@ title {
 
 .form_items * {
   margin: 5px auto;
-  width: 100%;
+  width: 90%;
   text-align: center;
+}
+
+.width_30 {
+  width: 30%;
+}
+
+.width_25 {
+  width: 25%;
+}
+
+.width_70 {
+  width: 70%;
+}
+
+.no_border {
+  border: none;
 }

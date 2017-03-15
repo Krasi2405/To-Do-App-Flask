@@ -5,13 +5,13 @@
 	{% with messages = get_flashed_messages() %}
 		{% if messages %}
 			{% for message in messages %}
-				<li>{{ message }}</li>
+				<li class = "btn btn-danger width_70">{{ message }}</li>
 			{% endfor %}
 		{% endif %}
 	{% endwith %}
 
 	{% for item in data %}
-	<li>{{ item["content"] }}</li>
+	<li>{{ item["content"] }} {{ item["date"] }} {{ item["priority"] }}</li>
 	{% endfor %}
 </ul>
 
@@ -26,9 +26,21 @@
 <div class = "option_menu">
 	<div class = "form_left">
 		<form id = "add" action = "{{ url_for('save') }}" method = "POST">
-			<div class = "form_items">
-				<label>Create new To-Do</label>
-				<textarea name = "content" form = "add" rows = "4" cols = "50" autofocus></textarea>
+			<div class = "form_items form_left width_25 no_border">
+				<label for = "date">Due Date</label>
+				<input type = "date" id = "date" name = "date">
+				<label for = "priority">Priority</label>
+				<select name = "priority" id = "priority">
+					<option value = "low">Low</option>
+					<option value = "medium">Medium</option>
+					<option value = "high">High</option>
+					<option value = "urgent">Urgent</option>
+				</select>
+			</div>
+
+			<div class = "form_items form_right width_70 no_border">
+				<label for = "content">Create new To-Do</label>
+				<textarea name = "content" form = "add" rows = "4" cols = "50" content = "content" autofocus></textarea>
 				<input type = "submit" value = "Submit">
 			</div>
 		</form>
