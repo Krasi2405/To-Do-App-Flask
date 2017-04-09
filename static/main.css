@@ -22,16 +22,6 @@ title {
   display: none;
 }
 
-.option_menu {
-  height: 200px;
-  background-color: #aaa;
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-  width: 75%;
-
-}
-
 .left_menu {
   background-color: #6098f2;
   border: solid 10px #3169c4;
@@ -45,8 +35,46 @@ title {
 .to_do_items {
   border-top: solid 10px #3169c4;
   border-right: solid 10px #3169c4;
-  background: lightgreen;
+  border-right: solid 10px #3169c4;
+  padding: 0;
   float: right;
+  height: 75vh;
+  width: 75%;
+}
+
+.item {
+  padding: 10px 50px;
+  font-size: 1.5em;
+}
+
+.low {
+  background: #7FF27B;
+}
+
+.medium {
+  background: #F9EE08;
+}
+
+.high {
+  background: #F9960C;
+}
+
+.urgent {
+  background: rgba(226, 0, 0, 1);
+}
+
+.date-priority {
+  display: inline;
+  float: right;
+}
+
+
+.option_menu {
+  background-color: #aaa;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  height: 25vh;
   width: 75%;
 }
 
@@ -78,6 +106,8 @@ title {
   width: 90%;
   text-align: center;
 }
+
+
 
 .width_30 {
   width: 30%;

@@ -11,7 +11,7 @@
 	{% endwith %}
 
 	{% for item in data %}
-	<li>{{ item["content"] }} {{ item["date"] }} {{ item["priority"] }}</li>
+	<li class = "item {{ item['priority'][1:] }}">{{ item["content"] }} <span class = "date-priority">{{ item["date"] }} {{ item["priority"][1:].title() }}</span></li>
 	{% endfor %}
 </ul>
 
@@ -31,10 +31,10 @@
 				<input type = "date" id = "date" name = "date">
 				<label for = "priority">Priority</label>
 				<select name = "priority" id = "priority">
-					<option value = "low">Low</option>
-					<option value = "medium">Medium</option>
-					<option value = "high">High</option>
-					<option value = "urgent">Urgent</option>
+					<option value = "1low">Low</option>
+					<option value = "2medium">Medium</option>
+					<option value = "3high">High</option>
+					<option value = "4urgent">Urgent</option>
 				</select>
 			</div>
 

@@ -2,7 +2,6 @@ from flask import  (Flask, render_template, make_response,
 					redirect, request, url_for, flash)
 
 import json
-
 import pdb
 
 users = []
@@ -13,6 +12,7 @@ app.secret_key = "ofsajpiofjeiwjg09w0ejgfajodf9hew809g092uja012-$90ash"
 def get_saved_data():
 	try:
 		data = json.loads(request.cookies.get('list_info'))
+		data = sorted(data, key=lambda x: x['priority'])
 	except TypeError:
 		data = []
 	return data
