@@ -9,38 +9,41 @@ users = []
 app = Flask(__name__)
 app.secret_key = "ofsajpiofjeiwjg09w0ejgfajodf9hew809g092uja012-$90ash"
 
-def get_saved_data():
+def get_saved_data(data_name = "list_info"):
 	try:
-		data = json.loads(request.cookies.get('list_info'))
-		data = sorted(data, key=lambda x: x['priority'])
+		data = json.loads(request.cookies.get(data_name))
 	except TypeError:
 		data = []
 	return data
 
-@app.route("/")
-@app.route("/index")
-def index():
-	data = get_saved_data()
-	return render_template("index.html", data = data)
 
-@app.route("/save", methods = ["POST"])
-def save():
-	data = get_saved_data()
+
+@app.route("/index/<string:list_name>")
+def index(list_name):
+	data = get_saved_data(list_name)
+	data = sorted(data, key = lambda x: x['priority'])
+	lists = get_saved_data("lists")
+	import pdb; pdb.set_trace()
+	return render_template("index.html", data = data, list_name = list_name, lists = lists)
+
+@app.route("/save/<string:list_name>", methods = ["POST"])
+def save(list_name):
+	data = get_saved_data(list_name)
 	data.append(dict(request.form.items()))
-	response = make_response(redirect(url_for("index")))
-	response.set_cookie('list_info', json.dumps(data))
+	response = make_response(redirect(url_for("index", list_name = list_name)))
+	response.set_cookie(list_name, json.dumps(data))
 	return response
 
-@app.route("/delete_all", methods = ["POST"])
-def delete_all():
+@app.route("/delete_all/<string:list_name>", methods = ["POST"])
+def delete_all(list_name):
 	data = []
-	response = make_response(redirect(url_for("index")))
-	response.set_cookie('list_info', json.dumps(data))
+	response = make_response(redirect(url_for("index", list_name = list_name)))
+	response.set_cookie(list_name, json.dumps(data))
 	return response
 
-@app.route("/delete_item", methods = ["POST"])
-def delete_item():
-	data = get_saved_data();
+@app.route("/delete_item/<string:list_name>", methods = ["POST"])
+def delete_item(list_name):
+	data = get_saved_data(list_name);
 	try: 
 		index = int(request.form["index"])
 		if(index < 1 or index > len(data)):
@@ -50,9 +53,30 @@ def delete_item():
 	except ValueError:
 		flash("Enter a value!");
 	
-
-	response = make_response(redirect(url_for("index")))
-	response.set_cookie('list_info', json.dumps(data))
+	response = make_response(redirect(url_for("index", list_name = list_name)))
+	response.set_cookie(list_name, json.dumps(data))
 	return response;
+
+
+@app.route("/add_list/<string:list_name>", methods = ["POST"])
+def add_list(list_name):
+	lists = get_saved_data("lists")
+	lists.append(request.form["list_name"])
+	response = make_response(redirect(url_for("index", list_name = list_name)))
+	response.set_cookie("lists", json.dumps(lists))
+	return response
+
+
+@app.route("/remove_list/<string:list_name>", methods = ["POST"])
+def remove_list(list_name):
+	lists = get_saved_data("lists")
+	index = int(request.form["list_index"])
+	response = make_response(redirect(url_for("index", list_name = list_name)))
+	if index >= 1 and index <= len(lists):
+		del lists[index - 1]
+		response.set_cookie("lists", json.dumps(lists))
+	else:
+		flash("Index out of range.")
+	return response
 
 app.run(debug = True)

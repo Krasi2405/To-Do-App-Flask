@@ -22,6 +22,7 @@ title {
   display: none;
 }
 
+/* LEFT MENU */
 .left_menu {
   background-color: #6098f2;
   border: solid 10px #3169c4;
@@ -32,6 +33,12 @@ title {
   float: left;
 }
 
+.left_menu ul li {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+/* ITEMS */
 .to_do_items {
   border-top: solid 10px #3169c4;
   border-right: solid 10px #3169c4;
@@ -69,6 +76,7 @@ title {
 }
 
 
+/* MAIN OPTION FORM MENU*/
 .option_menu {
   background-color: #aaa;
   position: fixed;
