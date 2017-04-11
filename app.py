@@ -17,13 +17,12 @@ def get_saved_data(data_name = "list_info"):
 	return data
 
 
-
+@app.route("/index")
 @app.route("/index/<string:list_name>")
-def index(list_name):
+def index(list_name = "unselected"):
 	data = get_saved_data(list_name)
 	data = sorted(data, key = lambda x: x['priority'])
 	lists = get_saved_data("lists")
-	import pdb; pdb.set_trace()
 	return render_template("index.html", data = data, list_name = list_name, lists = lists)
 
 @app.route("/save/<string:list_name>", methods = ["POST"])
@@ -71,12 +70,18 @@ def add_list(list_name):
 def remove_list(list_name):
 	lists = get_saved_data("lists")
 	index = int(request.form["list_index"])
-	response = make_response(redirect(url_for("index", list_name = list_name)))
 	if index >= 1 and index <= len(lists):
+		response.set_cookie(lists[index - 1], "", expires = 0)
 		del lists[index - 1]
+		list_name = "unselected"
+		response = make_response(redirect(url_for("index", list_name = list_name)))
 		response.set_cookie("lists", json.dumps(lists))
+
+		return response 
 	else:
+		response = make_response(redirect(url_for("index", list_name = list_name)))
 		flash("Index out of range.")
-	return response
+		return response
+
 
 app.run(debug = True)

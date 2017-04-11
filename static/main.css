@@ -33,10 +33,26 @@ title {
   float: left;
 }
 
+.lists {
+  height: 70%;
+}
+
 .left_menu ul li {
   font-size: 1.5em;
   color: #fff;
 }
+
+.list_menu form {
+  margin-top: 30px;
+}
+
+.list_menu form * {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
 
 /* ITEMS */
 .to_do_items {
@@ -115,8 +131,6 @@ title {
   text-align: center;
 }
 
-
-
 .width_30 {
   width: 30%;
 }
@@ -129,6 +143,9 @@ title {
   width: 70%;
 }
 
+.width_100 {
+  width: 100%;
+}
 .no_border {
   border: none;
 }

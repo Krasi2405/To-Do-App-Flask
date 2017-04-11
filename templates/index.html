@@ -5,23 +5,24 @@
 	{% with messages = get_flashed_messages() %}
 		{% if messages %}
 			{% for message in messages %}
-				<li class = "btn btn-danger width_70">{{ message }}</li>
+				<li class = "btn btn-danger width_100">{{ message }}</li>
 			{% endfor %}
 		{% endif %}
 	{% endwith %}
-
+	{% if list_name != "unselected" %}
 	{% for item in data %}
 	<li class = "item {{ item['priority'][1:] }}">{{ item["content"] }} <span class = "date-priority">{{ item["date"] }} {{ item["priority"][1:].title() }}</span></li>
 	{% endfor %}
+	{% endif %}
 </ul>
 
 <div class = "left_menu">
-	<ul>
+	<ul class = "lists">
 		{% for list in lists %}
-			<li><a href = "{{ list }}">{{ list.title() }}</a></li>
+			<li><a href = "/index/{{ list }}">{{ list.title() }}</a></li>
 		{% endfor %}
 	</ul>
-	
+
 	<div class = "list_menu">
 		<form id = "add_list" action = "{{ url_for('add_list', list_name = list_name) }}" method = "POST">
 			<label for = "list_name">List name</label>
@@ -41,6 +42,7 @@
 <div class = "option_menu">
 	<div class = "form_left">
 		<form id = "add_item" action = "{{ url_for('save', list_name = list_name) }}" method = "POST">
+			{% if list_name != "unselected" %}
 			<div class = "form_items form_left width_25 no_border">
 				<label for = "date">Due Date</label>
 				<input type = "date" id = "date" name = "date">
@@ -55,13 +57,15 @@
 
 			<div class = "form_items form_right width_70 no_border">
 				<label for = "content">Create new To-Do</label>
-				<textarea name = "content" form = "add" rows = "4" cols = "50" content = "content" autofocus></textarea>
+				<textarea type = "text" id = "content" name = "content" form = "add_item" rows = "4" cols = "50" autofocus></textarea>
 				<input type = "submit" value = "Submit">
 			</div>
+			{% endif %}
 		</form>
 	</div>
 
 	<div class = "form_right">
+		{% if list_name != "unselected" %}
 		<form id = "delete_all" action = "{{ url_for('delete_all', list_name = list_name) }}" method = "POST">
 			<div class = "form_items">
 				<input type = "submit" value = "Delete All Items">
@@ -74,6 +78,7 @@
 				<input type = "submit" value = "Delete Item">
 			</div>
 		</form>
+		{% endif %}
 	</div>
 </div>
 
