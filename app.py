@@ -71,10 +71,11 @@ def remove_list(list_name):
 	lists = get_saved_data("lists")
 	index = int(request.form["list_index"])
 	if index >= 1 and index <= len(lists):
-		response.set_cookie(lists[index - 1], "", expires = 0)
-		del lists[index - 1]
+		
 		list_name = "unselected"
 		response = make_response(redirect(url_for("index", list_name = list_name)))
+		response.set_cookie(lists[index - 1], "", expires = 0)
+		del lists[index - 1]
 		response.set_cookie("lists", json.dumps(lists))
 
 		return response 
