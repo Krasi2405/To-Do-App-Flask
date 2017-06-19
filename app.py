@@ -16,7 +16,7 @@ def get_saved_data(data_name = "list_info"):
 		data = []
 	return data
 
-
+@app.route("/")
 @app.route("/index")
 @app.route("/index/<string:list_name>")
 def index(list_name = "unselected"):
